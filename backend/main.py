@@ -6,6 +6,17 @@ Multilingual: French, English, Spanish
 
 import os
 import requests
+
+# Load .env file manually (no python-dotenv needed)
+# Try multiple paths for local and Render deployment
+for candidate in [".env", ".env", "../.env", "/app/.env", "/app/backend/.env"]:
+    if os.path.exists(candidate):
+        for line in open(candidate):
+            line = line.strip()
+            if "=" in line and not line.startswith("#"):
+                k, v = line.split("=", 1)
+                os.environ[k.strip()] = v.strip()
+        break
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -93,7 +104,6 @@ def detect_language(text: str) -> str:
 
 
 # Groq API (free, unlimited llama)
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 
@@ -104,7 +114,7 @@ def ask_jesus(question: str) -> str:
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {GROQ_API_KEY}"
+        "Authorization": f"Bearer {os.environ.get('GROQ_API_KEY', '')}"
     }
     payload = {
         "model": "llama-3.1-8b-instant",
