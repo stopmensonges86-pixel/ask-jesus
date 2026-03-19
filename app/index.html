@@ -3,184 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Ask Jesus — UCEM</title>
+  <title>Ask Jesus</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-      font-family: 'Georgia', serif;
-      background: #F5F0E8;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    /* Header */
-    header {
-      background: linear-gradient(135deg, #2C3E50, #4A6FA5);
-      color: #FFF;
-      padding: 24px 20px;
-      text-align: center;
-    }
+    body { font-family: Georgia, serif; background: #F5F0E8; min-height: 100vh; display: flex; flex-direction: column; }
+    header { background: linear-gradient(135deg, #2C3E50, #4A6FA5); color: #FFF; padding: 24px 20px; text-align: center; }
     header h1 { font-size: 22px; font-weight: normal; letter-spacing: 1px; }
     header p { font-size: 13px; opacity: 0.8; margin-top: 6px; font-style: italic; }
-    
-    /* Cross */
-    .cross {
-      font-size: 28px;
-      margin-bottom: 8px;
-      opacity: 0.9;
-    }
-    
-    /* Chat */
-    #chat {
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      max-width: 700px;
-      margin: 0 auto;
-      width: 100%;
-    }
-    
-    .message {
-      max-width: 85%;
-      padding: 14px 18px;
-      border-radius: 18px;
-      font-size: 16px;
-      line-height: 1.6;
-      white-space: pre-wrap;
-    }
-    
-    .message.user {
-      background: #4A6FA5;
-      color: #FFF;
-      align-self: flex-end;
-      border-bottom-right-radius: 4px;
-    }
-    
-    .message.jesus {
-      background: #FFF;
-      color: #2C3E50;
-      align-self: flex-start;
-      border-bottom-left-radius: 4px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    
-    .message.jesus .sender {
-      font-size: 11px;
-      color: #888;
-      margin-bottom: 6px;
-      font-family: sans-serif;
-    }
-    
-    .typing {
-      align-self: flex-start;
-      background: #FFF;
-      color: #AAA;
-      padding: 14px 18px;
-      border-radius: 18px;
-      font-size: 14px;
-      font-style: italic;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    
-    /* Input */
-    #input-area {
-      background: #FFF;
-      padding: 16px 20px;
-      border-top: 1px solid #E0D8C8;
-      display: flex;
-      gap: 12px;
-      align-items: flex-end;
-    }
-    
-    #messageInput {
-      flex: 1;
-      padding: 12px 16px;
-      border: 1.5px solid #D0C8B8;
-      border-radius: 24px;
-      font-size: 16px;
-      font-family: inherit;
-      background: #F9F5EE;
-      resize: none;
-      outline: none;
-      max-height: 120px;
-      line-height: 1.5;
-    }
+    .cross { font-size: 28px; margin-bottom: 8px; }
+    #chat { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; max-width: 700px; margin: 0 auto; width: 100%; }
+    .message { max-width: 85%; padding: 14px 18px; border-radius: 18px; font-size: 16px; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+    .message.user { background: #4A6FA5; color: #FFF; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .message.jesus { background: #FFF; color: #2C3E50; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .message.jesus .sender { font-size: 11px; color: #888; margin-bottom: 6px; font-family: sans-serif; }
+    .typing { align-self: flex-start; background: #FFF; color: #AAA; padding: 14px 18px; border-radius: 18px; font-size: 14px; font-style: italic; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    #input-area { background: #FFF; padding: 16px 20px; border-top: 1px solid #E0D8C8; display: flex; gap: 12px; align-items: flex-end; }
+    #messageInput { flex: 1; padding: 12px 16px; border: 1.5px solid #D0C8B8; border-radius: 24px; font-size: 16px; font-family: inherit; background: #F9F5EE; resize: none; outline: none; max-height: 120px; line-height: 1.5; }
     #messageInput:focus { border-color: #4A6FA5; }
-    
-    #sendBtn {
-      background: #4A6FA5;
-      color: #FFF;
-      border: none;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      font-size: 20px;
-      cursor: pointer;
-      transition: background 0.2s;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    #sendBtn { background: #4A6FA5; color: #FFF; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 20px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
     #sendBtn:hover { background: #3A5A8A; }
     #sendBtn:disabled { background: #AAA; }
-    
-    /* Disclaimer */
-    #disclaimer {
-      text-align: center;
-      font-size: 10px;
-      color: #AAA;
-      padding: 8px;
-      font-family: sans-serif;
-    }
-    
-    /* Intro message */
-    .intro {
-      text-align: center;
-      color: #888;
-      font-size: 14px;
-      padding: 40px 20px;
-      font-style: italic;
-    }
+    #disclaimer { text-align: center; font-size: 10px; color: #AAA; padding: 8px; font-family: sans-serif; }
+    .intro { text-align: center; color: #888; font-size: 14px; padding: 40px 20px; font-style: italic; }
   </style>
 </head>
 <body>
-
-<header>
-  <div class="cross">✝</div>
-  <h1>Ask Jesus</h1>
-  <p>Un Cours en Miracles</p>
-</header>
-
-<div id="chat">
-  <div class="intro">Écris ta question ci-dessous. Je suis là, avec toi.</div>
-</div>
-
+<header><img src="/jesus.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:8px;border:2px solid rgba(255,255,255,0.3);"><h1>Ask Jesus</h1><p></p></header>
+<div id="chat"><div class="intro">Écris ta pensée, ta question. Je suis là, avec toi.</div></div>
 <div id="input-area">
-  <textarea id="messageInput" placeholder="Écris ta pensée, ta question..." rows="1"></textarea>
+  <textarea id="messageInput" placeholder="Écris ta pensée..." rows="1"></textarea>
   <button id="sendBtn" onclick="sendMessage()">&#9658;</button>
 </div>
-
-<div id="disclaimer">Cet outil est basé sur "Un Cours en Miracles". Les réponses sont une inspiration, pas un conseil médical ou psychologique.</div>
-
+<div id="disclaimer">Cet outil est inspire par "Un Cours en Miracles". Les réponses sont une inspiration spirituelle.</div>
 <script>
 const chat = document.getElementById('chat');
 const input = document.getElementById('messageInput');
 const sendBtn = document.getElementById('sendBtn');
-
 let conversationHistory = [];
 
 input.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
-  // Auto-resize
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
   this.style.height = 'auto';
   this.style.height = Math.min(this.scrollHeight, 120) + 'px';
 });
@@ -189,7 +51,7 @@ function addMessage(text, who) {
   const div = document.createElement('div');
   div.className = 'message ' + who;
   if (who === 'jesus') {
-    div.innerHTML = '<div class="sender">Jésus</div>' + escapeHtml(text);
+    div.innerHTML = '<div class="sender">✝ Jésus</div>' + text.replace(/\n/g, '<br>');
   } else {
     div.textContent = text;
   }
@@ -201,70 +63,36 @@ function showTyping() {
   const div = document.createElement('div');
   div.className = 'message jesus typing';
   div.id = 'typing';
-  div.textContent = 'Jésus écrit...';
+  div.textContent = '✝ Jésus écrit...';
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
 }
 
-function hideTyping() {
-  const t = document.getElementById('typing');
-  if (t) t.remove();
-}
-
-function escapeHtml(text) {
-  return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
-}
+function hideTyping() { const t = document.getElementById('typing'); if (t) t.remove(); }
 
 async function sendMessage() {
   const text = input.value.trim();
   if (!text) return;
-  
-  // Clear input immediately
   input.value = '';
   input.style.height = 'auto';
-  
-  // Show user message
   addMessage(text, 'user');
-  
-  // Show typing
   showTyping();
   sendBtn.disabled = true;
-  
   try {
-    // Use OpenClaw gateway on same machine
-    const response = await fetch('http://52.91.103.105:3000/api/v1/chat', {
+    const API = window.location.origin;
+    const res = await fetch(API + '/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        text: text,
-        history: conversationHistory
-      })
+      body: JSON.stringify({ message: text })
     });
-    
-    if (!response.ok) throw new Error('API error');
-    const data = await response.json();
-    
+    const data = await res.json();
     hideTyping();
-    addMessage(data.response, 'jesus');
-    conversationHistory.push({ role: 'user', content: text });
-    conversationHistory.push({ role: 'assistant', content: data.response });
-    
-  } catch (e) {
+    if (data.response) addMessage(data.response, 'jesus');
+    else addMessage("Je suis là, avec toi.", 'jesus');
+  } catch(e) {
     hideTyping();
-    // Fallback: direct to local Flask backend
-    try {
-      const res = await fetch('/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text })
-      });
-      const data = await res.json();
-      addMessage(data.response || "Je suis avec toi. Parle-moi.", 'jesus');
-    } catch (e2) {
-      addMessage("Je suis là, avec toi. Quelque chose m'empêche de répondre pour le moment. Réessaie plus tard.", 'jesus');
-    }
+    addMessage("Je suis là, avec toi. Réessaie.", 'jesus');
   }
-  
   sendBtn.disabled = false;
 }
 </script>
